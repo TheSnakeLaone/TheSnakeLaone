@@ -1,0 +1,87 @@
+"https://discord.com/oauth2/authorize?client_id=ed0f0298a79b8fd6b9fe6db48d8f2c53dd79a0b5a4308c4ef608cd360b61618e&scope=bot
+import discord
+from discord.ext import commands
+
+# Créer une instance du bot avec un préfixe pour les commandes
+bot = commands.Bot(command_prefix='+')
+
+# Événement lorsque le bot est prêt
+@bot.event
+async def on_ready():
+    print(f'Bot connecté en tant que {bot.user.name}')
+
+# Commande simple pour répondre à !ping
+@bot.command(name='ping')
+async def ping(ctx):
+    await ctx.send('Pong!')
+
+# Lancer le bot avec le token
+bot.run('1MTA1NTUwMjcwOTI5NTQzNTc5Ng.GUlTxW.CF2m5XnuV6ICPubtX0muRqxTb-gliu__zXZ8d0')
+
+# Liste des utilisateurs avertis
+warned_users = {}
+
+# Événement lorsque le bot est prêt
+@bot.event
+async def on_ready():
+    print(f'Bot connecté en tant que {bot.user.name}')
+
+# Commande simple pour répondre à !ping
+@bot.command(name='ping')
+async def ping(ctx):
+    await ctx.send('Pong!')
+
+# Commande pour avertir un utilisateur
+@bot.command(name='warn')
+async def warn(ctx, member: discord.Member, *, reason=None):
+    if ctx.message.author.guild_permissions.administrator:
+        if member.id not in warned_users:
+            warned_users[member.id] = 0
+
+        warned_users[member.id] += 1
+
+        await ctx.send(f'{member.mention} a été averti pour la raison suivante: {reason}')
+
+        # Événement lorsque le bot est prêt
+@bot.event
+async def on_ready():
+    print(f'Bot connecté en tant que {bot.user.name}')
+
+# Commande simple pour répondre à !ping
+@bot.command(name='ping')
+async def ping(ctx):
+    await ctx.send('Pong!')
+
+# Commande pour bannir un utilisateur
+@bot.command(name='ban')
+async def ban(ctx, member: discord.Member, *, reason=None):
+    if ctx.message.author.guild_permissions.ban_members:
+        await member.ban(reason=reason)
+        await ctx.send(f'{member.mention} a été banni pour la raison suivante: {reason}')
+    else:
+        await ctx.send("Vous n'avez pas les permissions nécessaires pour bannir des membres.")
+
+# Lancer le bot avec le token
+bot.run('MTA1NTUwMjcwOTI5NTQzNTc5Ng.GUlTxW.CF2m5XnuV6ICPubtX0muRqxTb-gliu__zXZ8d0')
+
+# Événement lorsque le bot est prêt
+@bot.event
+async def on_ready():
+    print(f'Bot connecté en tant que {bot.user.name}')
+
+# Commande simple pour répondre à !ping
+@bot.command(name='ping')
+async def ping(ctx):
+    await ctx.send('Pong!')
+
+# Commande pour expulser un utilisateur
+@bot.command(name='kick')
+async def kick(ctx, member: discord.Member, *, reason=None):
+    if ctx.message.author.guild_permissions.kick_members:
+        await member.kick(reason=reason)
+        await ctx.send(f'{member.mention} a été expulsé pour la raison suivante: {reason}')
+    else:
+        await ctx.send("Vous n'avez pas les permissions nécessaires pour expulser des membres.")
+
+# Lancer le bot avec le token
+bot.run('MTA1NTUwMjcwOTI5NTQzNTc5Ng.GUlTxW.CF2m5XnuV6ICPubtX0muRqxTb-gliu__zXZ8d0')
